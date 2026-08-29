@@ -32,19 +32,29 @@ public class HireHubController {
         Optional<JobPost> job = service.getJobById(id);
 
         if (job.isPresent())
-            return new ResponseEntity<>(job.get(),HttpStatus.OK);
+            return new ResponseEntity<>(job.get(), HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/Job")
-    public ResponseEntity<JobPost> addJob(@RequestBody JobPost jobPost)
-    {
+    public ResponseEntity<JobPost> addJob(@RequestBody JobPost jobPost) {
         try {
             JobPost job = service.addJob(jobPost);
-            return new ResponseEntity<>(job,HttpStatus.CREATED);
+            return new ResponseEntity<>(job, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/Job/{id}")
+    public ResponseEntity<JobPost> updateJob(@RequestBody JobPost jobPost, @PathVariable("id") int id) {
+        JobPost updatedJob = service.updateJob(jobPost, id);
+
+        if (updatedJob != null) {
+            return new ResponseEntity<>(updatedJob, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
