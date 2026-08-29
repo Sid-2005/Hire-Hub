@@ -28,4 +28,9 @@ public class JobPostService {
 
         return repo.findById(id);
     }
+
+    public JobPost addJob(JobPost jobPost) {
+
+        return repo.save(jobPost);
+    }
 }

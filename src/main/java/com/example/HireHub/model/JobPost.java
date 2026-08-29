@@ -16,7 +16,7 @@ public class JobPost {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "job_post_seq")
     @SequenceGenerator(name = "job_post_seq", sequenceName = "job_post_seq", initialValue = 1, allocationSize = 1)
-    private int postId;
+    private Integer postId;
 
     private String postProfile;
     private String postDesc;
