@@ -46,4 +46,13 @@ public class JobPostService {
         return null;
     }
 }
+
+    public boolean deleteJob(int id) {
+        if(repo.existsById(id))
+        {
+            repo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

@@ -57,4 +57,15 @@ public class HireHubController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/Job/{id}")
+    public ResponseEntity<Void> deleteJob(@PathVariable("id") int id)
+    {
+        boolean isDeleted = service.deleteJob(id);
+        if(isDeleted)
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
 }
