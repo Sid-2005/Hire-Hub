@@ -59,13 +59,23 @@ public class HireHubController {
     }
 
     @DeleteMapping("/Job/{id}")
-    public ResponseEntity<Void> deleteJob(@PathVariable("id") int id)
-    {
+    public ResponseEntity<Void> deleteJob(@PathVariable("id") int id) {
         boolean isDeleted = service.deleteJob(id);
-        if(isDeleted)
+        if (isDeleted)
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
+
+    @GetMapping("/Job/search")
+    public ResponseEntity<List<JobPost>> searchByKeyword(@RequestParam("keyword") String keyword) {
+        List<JobPost> jobs = service.searchByKeyword(keyword);
+
+        if (jobs.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        else
+            return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
 }

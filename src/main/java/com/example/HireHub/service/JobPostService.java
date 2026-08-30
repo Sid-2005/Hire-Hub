@@ -3,8 +3,6 @@ package com.example.HireHub.service;
 import com.example.HireHub.model.JobPost;
 import com.example.HireHub.repo.JobPostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,5 +52,10 @@ public class JobPostService {
             return true;
         }
         return false;
+    }
+
+    public List<JobPost> searchByKeyword(String keyword) {
+
+        return repo.searchByKeyword(keyword);
     }
 }
