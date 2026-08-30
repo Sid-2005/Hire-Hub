@@ -78,4 +78,24 @@ public class HireHubController {
             return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
+    @GetMapping("/Job/tech")
+    public ResponseEntity<List<JobPost>> getJobsByTechStack(@RequestParam("skill") String skill) {
+        List<JobPost> jobs = service.filterByTechStack(skill);
+
+        if (jobs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/Job/experience/{years}")
+    public ResponseEntity<List<JobPost>> getJobsByExperience(@PathVariable("years") int years) {
+        List<JobPost> jobs = service.filterByExperience(years);
+
+        if (jobs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
 }

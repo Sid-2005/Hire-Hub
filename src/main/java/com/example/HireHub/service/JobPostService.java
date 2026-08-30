@@ -35,19 +35,18 @@ public class JobPostService {
     }
 
     public JobPost updateJob(JobPost jobPost, int id) {
-    Optional<JobPost> existingJob = repo.findById(id);
+        Optional<JobPost> existingJob = repo.findById(id);
 
-    if(existingJob.isPresent()) {
-        jobPost.setPostId(id);
-        return repo.save(jobPost);
-    } else {
-        return null;
+        if (existingJob.isPresent()) {
+            jobPost.setPostId(id);
+            return repo.save(jobPost);
+        } else {
+            return null;
+        }
     }
-}
 
     public boolean deleteJob(int id) {
-        if(repo.existsById(id))
-        {
+        if (repo.existsById(id)) {
             repo.deleteById(id);
             return true;
         }
@@ -57,5 +56,13 @@ public class JobPostService {
     public List<JobPost> searchByKeyword(String keyword) {
 
         return repo.searchByKeyword(keyword);
+    }
+
+    public List<JobPost> filterByExperience(int years) {
+        return repo.findByReqExperience(years);
+    }
+
+    public List<JobPost> filterByTechStack(String skill) {
+        return repo.findByTechStack(skill);
     }
 }

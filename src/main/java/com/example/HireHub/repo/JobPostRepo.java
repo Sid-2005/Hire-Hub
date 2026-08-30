@@ -17,4 +17,10 @@ public interface JobPostRepo extends JpaRepository<JobPost,Integer> {
            "OR LOWER(j.postDesc) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
            "OR LOWER(t) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<JobPost> searchByKeyword(@Param("keyword") String keyword);
+
+    List<JobPost> findByReqExperience(Integer reqExperience);
+
+    @Query("SELECT DISTINCT j FROM JobPost j JOIN j.postTechStack t " +
+           "WHERE LOWER(t) LIKE LOWER(CONCAT('%', :skill, '%'))")
+    List<JobPost> findByTechStack(@Param("skill") String skill);
 }
