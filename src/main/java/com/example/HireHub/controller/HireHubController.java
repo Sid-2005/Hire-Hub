@@ -22,12 +22,12 @@ public class HireHubController {
         this.service = service;
     }
 
-    @GetMapping("/Jobs")
+    @GetMapping("/jobs")
     public ResponseEntity<List<JobPost>> getAllJobs() {
         return new ResponseEntity<>(service.getAllJobs(), HttpStatus.OK);
     }
 
-    @GetMapping("/Job/{id}")
+    @GetMapping("/job/{id}")
     public ResponseEntity<JobPost> getJobById(@PathVariable("id") int id) {
         Optional<JobPost> job = service.getJobById(id);
 
@@ -37,7 +37,7 @@ public class HireHubController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/Job")
+    @PostMapping("/jobs")
     public ResponseEntity<JobPost> addJob(@RequestBody JobPost jobPost) {
         try {
             JobPost job = service.addJob(jobPost);
@@ -47,7 +47,7 @@ public class HireHubController {
         }
     }
 
-    @PutMapping("/Job/{id}")
+    @PutMapping("/jobs/{id}")
     public ResponseEntity<JobPost> updateJob(@RequestBody JobPost jobPost, @PathVariable("id") int id) {
         JobPost updatedJob = service.updateJob(jobPost, id);
 
@@ -58,7 +58,7 @@ public class HireHubController {
         }
     }
 
-    @DeleteMapping("/Job/{id}")
+    @DeleteMapping("/jobs/{id}")
     public ResponseEntity<Void> deleteJob(@PathVariable("id") int id) {
         boolean isDeleted = service.deleteJob(id);
         if (isDeleted)
@@ -68,7 +68,7 @@ public class HireHubController {
 
     }
 
-    @GetMapping("/Job/search")
+    @GetMapping("/job/search")
     public ResponseEntity<List<JobPost>> searchByKeyword(@RequestParam("keyword") String keyword) {
         List<JobPost> jobs = service.searchByKeyword(keyword);
 
@@ -78,7 +78,7 @@ public class HireHubController {
             return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
-    @GetMapping("/Job/tech")
+    @GetMapping("/job/tech")
     public ResponseEntity<List<JobPost>> getJobsByTechStack(@RequestParam("skill") String skill) {
         List<JobPost> jobs = service.filterByTechStack(skill);
 
@@ -88,7 +88,7 @@ public class HireHubController {
         return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
-    @GetMapping("/Job/experience/{years}")
+    @GetMapping("/job/experience/{years}")
     public ResponseEntity<List<JobPost>> getJobsByExperience(@PathVariable("years") int years) {
         List<JobPost> jobs = service.filterByExperience(years);
 
