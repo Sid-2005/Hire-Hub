@@ -27,8 +27,41 @@ public class HireHubController {
         return new ResponseEntity<>(service.getAllJobs(), HttpStatus.OK);
     }
 
-    @GetMapping("/job/{id}")
-    public ResponseEntity<JobPost> getJobById(@PathVariable("id") int id) {
+    @GetMapping("/jobs/search")
+    public ResponseEntity<List<JobPost>> searchByKeyword(@RequestParam String keyword) {
+        List<JobPost> jobs = service.searchByKeyword(keyword);
+
+        if (jobs.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        else
+            return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/jobs/filter")
+    public ResponseEntity<List<JobPost>> filterJobs(
+            @RequestParam(required = false) String skill,
+            @RequestParam(required = false) Integer years) {
+        List<JobPost> jobs;
+
+        if (skill != null && years != null) {
+            jobs = service.filterByTechStack(skill);
+            jobs.retainAll(service.filterByExperience(years));
+        } else if (skill != null) {
+            jobs = service.filterByTechStack(skill);
+        } else if (years != null) {
+            jobs = service.filterByExperience(years);
+        } else {
+            jobs = service.getAllJobs();
+        }
+
+        if (jobs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/jobs/{id}")
+    public ResponseEntity<JobPost> getJobById(@PathVariable int id) {
         Optional<JobPost> job = service.getJobById(id);
 
         if (job.isPresent())
@@ -48,7 +81,7 @@ public class HireHubController {
     }
 
     @PutMapping("/jobs/{id}")
-    public ResponseEntity<JobPost> updateJob(@RequestBody JobPost jobPost, @PathVariable("id") int id) {
+    public ResponseEntity<JobPost> updateJob(@RequestBody JobPost jobPost, @PathVariable int id) {
         JobPost updatedJob = service.updateJob(jobPost, id);
 
         if (updatedJob != null) {
@@ -59,43 +92,12 @@ public class HireHubController {
     }
 
     @DeleteMapping("/jobs/{id}")
-    public ResponseEntity<Void> deleteJob(@PathVariable("id") int id) {
+    public ResponseEntity<Void> deleteJob(@PathVariable int id) {
         boolean isDeleted = service.deleteJob(id);
         if (isDeleted)
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-    }
-
-    @GetMapping("/job/search")
-    public ResponseEntity<List<JobPost>> searchByKeyword(@RequestParam("keyword") String keyword) {
-        List<JobPost> jobs = service.searchByKeyword(keyword);
-
-        if (jobs.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        else
-            return new ResponseEntity<>(jobs, HttpStatus.OK);
-    }
-
-    @GetMapping("/job/tech")
-    public ResponseEntity<List<JobPost>> getJobsByTechStack(@RequestParam("skill") String skill) {
-        List<JobPost> jobs = service.filterByTechStack(skill);
-
-        if (jobs.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(jobs, HttpStatus.OK);
-    }
-
-    @GetMapping("/job/experience/{years}")
-    public ResponseEntity<List<JobPost>> getJobsByExperience(@PathVariable("years") int years) {
-        List<JobPost> jobs = service.filterByExperience(years);
-
-        if (jobs.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(jobs, HttpStatus.OK);
     }
 
 }
