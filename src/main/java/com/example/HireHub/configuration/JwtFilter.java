@@ -38,7 +38,6 @@ public class JwtFilter extends OncePerRequestFilter {
             try {
                 username = jwtService.extractUserName(token);
             } catch (Exception e) {
-                // Invalid or expired token; proceed without setting authentication
             }
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

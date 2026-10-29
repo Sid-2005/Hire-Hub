@@ -1,0 +1,195 @@
+/* ── Header ── */
+.appl-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.appl-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.appl-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 8px 24px var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.appl-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.appl-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.appl-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Stats ── */
+.appl-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.appl-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+}
+
+.appl-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.appl-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.appl-stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* ── Search ── */
+.appl-search {
+  margin-bottom: 20px;
+  max-width: 420px;
+}
+
+/* ── Table ── */
+.appl-table-wrap {
+  overflow: hidden;
+  padding: 0;
+}
+
+.appl-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.appl-table thead {
+  background: var(--bg-secondary);
+}
+
+.appl-table th {
+  padding: 13px 20px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.appl-table td {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.appl-row {
+  transition: background var(--transition);
+}
+
+.appl-row:hover {
+  background: var(--bg-card-hover);
+}
+
+.appl-idx {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  width: 40px;
+}
+
+.appl-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.appl-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.appl-username {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.appl-date {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Reuse breadcrumb from JobDetailPage */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.breadcrumb-link {
+  color: var(--accent-light);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.breadcrumb-link:hover { color: var(--cyan); }
+.breadcrumb-sep { color: var(--text-muted); }
+
+@media (max-width: 640px) {
+  .appl-title { font-size: 22px; }
+  .appl-table th:last-child,
+  .appl-table td:last-child { display: none; }
+}
