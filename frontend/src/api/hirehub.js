@@ -1,11 +1,20 @@
 import axios from 'axios';
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+if (!apiBaseUrl) {
+  throw new Error(
+    '[HireHub] VITE_API_BASE_URL is not defined.\n' +
+    'Local dev: set it in frontend/.env\n' +
+    'Production: set it in your hosting platform environment variables.'
+  );
+}
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: apiBaseUrl,
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Attach JWT token to every request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('hirehub_token');
   if (token) {
@@ -14,7 +23,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 globally — clear token and redirect
 api.interceptors.response.use(
   (res) => res,
   (err) => {
@@ -27,11 +35,9 @@ api.interceptors.response.use(
   }
 );
 
-// ─── Auth ───
 export const loginUser = (creds) => api.post('/login', creds);
 export const registerUser = (data) => api.post('/register', data);
 
-// ─── Jobs ───
 export const getAllJobs = () => api.get('/jobs');
 export const getJobById = (id) => api.get(`/jobs/${id}`);
 export const searchJobs = (keyword) => api.get('/jobs/search', { params: { keyword } });
@@ -45,7 +51,6 @@ export const createJob = (job) => api.post('/jobs', job);
 export const updateJob = (id, job) => api.put(`/jobs/${id}`, job);
 export const deleteJob = (id) => api.delete(`/jobs/${id}`);
 
-// ─── Applications ───
 export const applyForJob = (jobId) => api.post(`/jobs/${jobId}/apply`);
 export const checkApplied = (jobId) => api.get(`/jobs/${jobId}/applied`);
 export const getJobApplications = (jobId) => api.get(`/jobs/${jobId}/applications`);

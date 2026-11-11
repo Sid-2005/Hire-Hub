@@ -1,0 +1,453 @@
+/* ════════════════════════════════════════════════════
+   RegisterPage.css — Emerald-accented full-screen card
+   ════════════════════════════════════════════════════ */
+
+/* ── Root ── */
+.rp-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.12) 0%, transparent 65%),
+              var(--bg-primary);
+  padding: 32px 20px;
+}
+
+/* ── Ambient blobs ── */
+.rp-blob {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(2px);
+}
+.rp-blob-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 68%);
+  top: -180px; right: -120px;
+  animation: blobFloat 14s ease-in-out infinite;
+}
+.rp-blob-2 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 68%);
+  bottom: -100px; left: -80px;
+  animation: blobFloat 11s ease-in-out infinite reverse 2s;
+}
+.rp-blob-3 {
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 68%);
+  top: 55%; left: 55%;
+  animation: blobFloat 8s ease-in-out infinite 1s;
+}
+@keyframes blobFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%     { transform: translate(20px,-25px) scale(1.07); }
+  70%     { transform: translate(-15px,12px) scale(0.93); }
+}
+
+/* ── Card wrapper ── */
+.rp-card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  z-index: 2;
+  background: rgba(16, 24, 32, 0.9);
+  border: 1px solid rgba(99,102,241,0.18);
+  border-radius: 28px;
+  padding: 48px 44px 40px;
+  box-shadow:
+    0 0 0 1px rgba(99,102,241,0.06),
+    0 32px 80px rgba(0,0,0,0.65),
+    0 0 60px rgba(99,102,241,0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  animation: rpCardIn 0.5s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes rpCardIn {
+  from { opacity: 0; transform: translateY(32px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Top glow bar */
+.rp-card-glow {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.75), transparent);
+  border-radius: 50%;
+}
+
+/* ── Logo ── */
+.rp-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.rp-logo-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(99,102,241,0.4), 0 6px 16px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+.rp-logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+}
+
+/* ── Progress steps ── */
+.rp-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
+}
+.rp-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+.rp-step-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+.rp-step--done   .rp-step-dot { background: rgba(99,102,241,0.2); border: 1.5px solid var(--accent); color: var(--accent-light); }
+.rp-step--active .rp-step-dot { background: var(--accent); border: none; color: #fff; box-shadow: 0 0 16px rgba(99,102,241,0.5); }
+.rp-step--idle   .rp-step-dot { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1); color: var(--text-muted); }
+.rp-step-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.rp-step--active .rp-step-label { color: var(--accent-light); }
+.rp-step--done   .rp-step-label { color: var(--accent-light); }
+.rp-step-line {
+  width: 60px;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 0 4px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.rp-step-line--done { background: rgba(99,102,241,0.4); }
+
+/* ── Header ── */
+.rp-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.rp-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.rp-title-accent {
+  background: linear-gradient(90deg, var(--accent-light) 0%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.rp-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ── Alerts ── */
+.rp-alert-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #fca5a5;
+  font-weight: 500;
+  animation: rpShake 0.35s cubic-bezier(0.36,0.07,0.19,0.97);
+}
+@keyframes rpShake {
+  0%,100% { transform: translateX(0); }
+  25%     { transform: translateX(-6px); }
+  75%     { transform: translateX(6px); }
+}
+.rp-alert-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(239,68,68,0.6);
+}
+.rp-alert-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--accent-light);
+  font-weight: 500;
+}
+
+/* ── Form ── */
+.rp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Field ── */
+.rp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.rp-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+.rp-field--focused .rp-label { color: var(--accent-light); }
+
+.rp-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.rp-input-icon {
+  position: absolute;
+  left: 15px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: color var(--transition);
+  flex-shrink: 0;
+}
+.rp-field--focused .rp-input-icon { color: var(--accent-light); }
+
+.rp-input {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+  caret-color: var(--accent-light);
+}
+.rp-input::placeholder { color: var(--text-muted); }
+.rp-input:focus {
+  border-color: var(--accent);
+  background: rgba(99,102,241,0.06);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.18), 0 2px 12px rgba(99,102,241,0.1);
+}
+.rp-input--padded-right { padding-right: 46px; }
+
+.rp-eye-btn {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color var(--transition), background var(--transition);
+}
+.rp-eye-btn:hover {
+  color: var(--accent-light);
+  background: rgba(99,102,241,0.08);
+}
+
+/* ── Password strength meter ── */
+.rp-strength {
+  margin-top: 2px;
+}
+.rp-strength-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+.rp-strength-seg {
+  flex: 1;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.08);
+  transition: background 0.3s;
+}
+.rp-strength-seg--active-1 { background: #ef4444; }
+.rp-strength-seg--active-2 { background: #f59e0b; }
+.rp-strength-seg--active-3 { background: var(--accent-light); }
+.rp-strength-seg--active-4 { background: var(--cyan); }
+.rp-strength-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.rp-strength-label--1 { color: #fca5a5; }
+.rp-strength-label--2 { color: #fcd34d; }
+.rp-strength-label--3 { color: var(--accent-light); }
+.rp-strength-label--4 { color: var(--cyan); }
+
+.rp-field-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── Submit ── */
+.rp-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px 24px;
+  margin-top: 4px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 8px 28px rgba(99,102,241,0.35);
+  position: relative;
+  overflow: hidden;
+}
+.rp-submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.rp-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(99,102,241,0.5);
+}
+.rp-submit-btn:hover::before { opacity: 1; }
+.rp-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(99,102,241,0.3);
+}
+.rp-submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.rp-btn-arrow {
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+.rp-submit-btn:hover:not(:disabled) .rp-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Spinner ── */
+.rp-spinner {
+  display: inline-block;
+  width: 20px; height: 20px;
+  border: 2.5px solid rgba(255,255,255,0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: rpSpin 0.65s linear infinite;
+}
+@keyframes rpSpin { to { transform: rotate(360deg); } }
+
+/* ── Benefits row ── */
+.rp-benefits {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.rp-benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-align: center;
+}
+.rp-benefit-icon {
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-light);
+}
+
+/* ── Footer ── */
+.rp-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+.rp-footer-link {
+  color: var(--accent-light);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color var(--transition);
+}
+.rp-footer-link:hover { color: var(--cyan); }
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .rp-card {
+    padding: 36px 24px 32px;
+    border-radius: 20px;
+  }
+  .rp-title { font-size: 22px; }
+  .rp-step-line { width: 36px; }
+}
+
