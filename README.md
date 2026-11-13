@@ -1,6 +1,7 @@
 # HireHub 💼🚀
 
 [![Live Demo](https://img.shields.io/badge/Demo-Live%20Website-brightgreen?style=for-the-badge&logo=vercel)](https://hire-hub-frontend-psi.vercel.app)
+[![Demo Video](https://img.shields.io/badge/Demo-Watch%20Video-red?style=for-the-badge&logo=github&logoColor=white)](#-demo-video)
 [![Java](https://img.shields.io/badge/Java-21%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-19.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
@@ -14,12 +15,20 @@
 
 ## 🌐 Live Demo
 
-Experience the live application here:  
+Experience the live application here:  
 👉 **[https://hire-hub-frontend-psi.vercel.app](https://hire-hub-frontend-psi.vercel.app)**
 
 - **Frontend:** Hosted on **Vercel** with automatic SPA rewrites
 - **Backend:** Hosted on **Render** (REST API)
 - **Database:** Managed Cloud **PostgreSQL**
+
+---
+
+## 🎥 Demo Video
+
+Watch a complete walkthrough of HireHub: registration and login, job search and filtering, one-click apply, and the recruiter dashboard.
+
+https://github.com/user-attachments/assets/6f039eae-6830-4ad2-b24b-0e7673040458
 
 ---
 
@@ -83,70 +92,70 @@ Experience the live application here:  
 
 ```text
 HireHub/
-├── .env.example                          # Backend environment variables template
-├── ENV_GUIDE.md                          # Detailed environment setup & deployment manual
-├── HELP.md                               # Spring Boot references and guides
-├── pom.xml                               # Maven project definition and dependencies
-├── mvnw / mvnw.cmd                       # Maven wrapper executables
+├── .env.example                          # Backend environment variables template
+├── ENV_GUIDE.md                          # Detailed environment setup & deployment manual
+├── HELP.md                               # Spring Boot references and guides
+├── pom.xml                               # Maven project definition and dependencies
+├── mvnw / mvnw.cmd                       # Maven wrapper executables
 │
-├── src/                                  # Spring Boot Backend Source Code
-│   ├── main/
-│   │   ├── java/com/example/HireHub/
-│   │   │   ├── HireHubApplication.java   # Spring Boot main entry point
-│   │   │   ├── configuration/            # Security & Filter Configurations
-│   │   │   │   ├── JwtFilter.java        # OncePerRequestFilter for Bearer tokens
-│   │   │   │   └── SecurityConfiguration.java # SecurityFilterChain, CORS, and PasswordEncoder
-│   │   │   ├── controller/               # REST API Controllers
-│   │   │   │   ├── HireHubController.java     # Job CRUD, search & filter endpoints
-│   │   │   │   ├── JobApplicationController.java # Application submission & review endpoints
-│   │   │   │   └── MyUserController.java      # Auth endpoints (/login, /register)
-│   │   │   ├── model/                    # JPA Entities
-│   │   │   │   ├── JobApplication.java   # Application records with unique constraints
-│   │   │   │   ├── JobPost.java          # Job post entity with element collections
-│   │   │   │   ├── MyUser.java           # User credentials and roles
-│   │   │   │   └── MyUsersDetail.java    # Spring Security UserDetails adapter
-│   │   │   ├── repo/                     # Spring Data JPA Repositories
-│   │   │   │   ├── JobApplicationRepo.java
-│   │   │   │   ├── JobPostRepo.java
-│   │   │   │   └── MyUserRepo.java
-│   │   │   └── service/                  # Business Logic Services
-│   │   │       ├── JobApplicationService.java
-│   │   │       ├── JobPostService.java
-│   │   │       ├── JwtService.java       # HMAC-SHA256 signing and claims extraction
-│   │   │       ├── MyUserDetailService.java
-│   │   │       └── MyUsersService.java
-│   │   └── resources/
-│   │       └── application.properties    # Environment-backed configuration mappings
-│   └── test/                             # Automated Tests
+├── src/                                  # Spring Boot Backend Source Code
+│   ├── main/
+│   │   ├── java/com/example/HireHub/
+│   │   │   ├── HireHubApplication.java   # Spring Boot main entry point
+│   │   │   ├── configuration/            # Security & Filter Configurations
+│   │   │   │   ├── JwtFilter.java        # OncePerRequestFilter for Bearer tokens
+│   │   │   │   └── SecurityConfiguration.java # SecurityFilterChain, CORS, and PasswordEncoder
+│   │   │   ├── controller/               # REST API Controllers
+│   │   │   │   ├── HireHubController.java     # Job CRUD, search & filter endpoints
+│   │   │   │   ├── JobApplicationController.java # Application submission & review endpoints
+│   │   │   │   └── MyUserController.java      # Auth endpoints (/login, /register)
+│   │   │   ├── model/                    # JPA Entities
+│   │   │   │   ├── JobApplication.java   # Application records with unique constraints
+│   │   │   │   ├── JobPost.java          # Job post entity with element collections
+│   │   │   │   ├── MyUser.java           # User credentials and roles
+│   │   │   │   └── MyUsersDetail.java    # Spring Security UserDetails adapter
+│   │   │   ├── repo/                     # Spring Data JPA Repositories
+│   │   │   │   ├── JobApplicationRepo.java
+│   │   │   │   ├── JobPostRepo.java
+│   │   │   │   └── MyUserRepo.java
+│   │   │   └── service/                  # Business Logic Services
+│   │   │       ├── JobApplicationService.java
+│   │   │       ├── JobPostService.java
+│   │   │       ├── JwtService.java       # HMAC-SHA256 signing and claims extraction
+│   │   │       ├── MyUserDetailService.java
+│   │   │       └── MyUsersService.java
+│   │   └── resources/
+│   │       └── application.properties    # Environment-backed configuration mappings
+│   └── test/                             # Automated Tests
 │
-└── frontend/                             # React 19 + Vite Frontend SPA
-    ├── .env.example                      # Frontend environment template
-    ├── index.html                        # HTML entry point with favicon
-    ├── package.json                      # NPM dependencies and scripts
-    ├── vite.config.js                    # Vite configuration with local proxy & build guards
-    ├── vercel.json                       # Vercel SPA routing rewrite configuration
-    ├── public/
-    │   ├── _redirects                    # Netlify/Render static site SPA routing rule
-    │   └── favicon.svg                   # Brand icon
-    └── src/
-        ├── main.jsx                      # React DOM mounting entry point
-        ├── App.jsx                       # Client-side router configuration
-        ├── api/
-        │   └── hirehub.js                # Centralized Axios instance with auth interceptors
-        ├── context/
-        │   └── AuthContext.jsx           # Global authentication context & token state
-        ├── components/                   # Reusable UI Components
-        │   ├── Navbar.jsx                # Responsive navigation bar
-        │   └── ProtectedRoute.jsx        # Role-based route guard
-        └── pages/                        # Views & Route Components
-            ├── HomePage.jsx              # Landing page
-            ├── LoginPage.jsx             # User & Admin Login
-            ├── RegisterPage.jsx          # Account registration
-            ├── JobsPage.jsx              # Jobs catalog with search and filters
-            ├── JobDetailPage.jsx         # Detailed job specifications & application trigger
-            ├── JobFormPage.jsx           # Admin job creation & edit form
-            ├── ApplicantsPage.jsx        # Admin application management console
-            └── MyApplicationsPage.jsx    # Candidate application tracker
+└── frontend/                             # React 19 + Vite Frontend SPA
+    ├── .env.example                      # Frontend environment template
+    ├── index.html                        # HTML entry point with favicon
+    ├── package.json                      # NPM dependencies and scripts
+    ├── vite.config.js                    # Vite configuration with local proxy & build guards
+    ├── vercel.json                       # Vercel SPA routing rewrite configuration
+    ├── public/
+    │   ├── _redirects                    # Netlify/Render static site SPA routing rule
+    │   └── favicon.svg                   # Brand icon
+    └── src/
+        ├── main.jsx                      # React DOM mounting entry point
+        ├── App.jsx                       # Client-side router configuration
+        ├── api/
+        │   └── hirehub.js                # Centralized Axios instance with auth interceptors
+        ├── context/
+        │   └── AuthContext.jsx           # Global authentication context & token state
+        ├── components/                   # Reusable UI Components
+        │   ├── Navbar.jsx                # Responsive navigation bar
+        │   └── ProtectedRoute.jsx        # Role-based route guard
+        └── pages/                        # Views & Route Components
+            ├── HomePage.jsx              # Landing page
+            ├── LoginPage.jsx             # User & Admin Login
+            ├── RegisterPage.jsx          # Account registration
+            ├── JobsPage.jsx              # Jobs catalog with search and filters
+            ├── JobDetailPage.jsx         # Detailed job specifications & application trigger
+            ├── JobFormPage.jsx           # Admin job creation & edit form
+            ├── ApplicantsPage.jsx        # Admin application management console
+            └── MyApplicationsPage.jsx    # Candidate application tracker
 ```
 
 ---
@@ -298,17 +307,17 @@ Contributions, issues, and feature requests are welcome!
 
 1. **Fork the Repository**
 2. **Create a Feature Branch:**
-   ```bash
-   git checkout -b feature/AmazingFeature
-   ```
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
 3. **Commit your Changes:**
-   ```bash
-   git commit -m "Add some AmazingFeature"
-   ```
+   ```bash
+   git commit -m "Add some AmazingFeature"
+   ```
 4. **Push to the Branch:**
-   ```bash
-   git push origin feature/AmazingFeature
-   ```
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
 5. **Open a Pull Request**
 
 ---
@@ -320,5 +329,5 @@ This project is licensed under the [MIT License](LICENSE) - see the LICENSE file
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by the HireHub Team. If you find this project useful, feel free to give it a ⭐ on GitHub!</sub>
+  <sub>Built with ❤️ by the HireHub Team. If you find this project useful, feel free to give it a ⭐ on GitHub!</sub>
 </div>
